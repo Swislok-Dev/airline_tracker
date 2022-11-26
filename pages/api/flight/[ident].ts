@@ -3,7 +3,7 @@ import { NextApiResponse, NextApiRequest } from "next";
 
 const aeroapiURI = "https://aeroapi.flightaware.com/aeroapi/";
 
-const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const ident = req.query.ident.toUpperCase();
 
   axios
@@ -14,16 +14,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
       },
     })
     .then((response) => {
-      console.log(response.data["flights"]);
-      res.status(200).send(response.data["flights"]);
+      res.status(200).json(response.data["flights"]);
     })
     .catch((err) => {
       res.status(400).json({ message: err.message });
     });
 };
-
-// module.exports = {
-//   handler,
-// };
 
 export default handler;
