@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import * as functions from "../components/flights/functions.js";
 import FlightItem from "../components/flights/FlightItem";
 
 function Tracker() {
   const [ident, setIdent] = useState("");
-  const [flights, setFlights] = useState([]);
+  const [flights, setFlights] = useState<AxiosResponse | [] | null | void>();
   const [nextFlight, setNextFlight] = useState({});
 
   const getFlightInfo = async (ident: string) => {
-    const flightsArray = await axios.get(`/api/flight/${ident}`);
+    const flightsArray = await axios.get(`/api/flight/${ident.toUpperCase()}`);
     setFlights(flightsArray);
     const nextFlight = functions.findNextFlight(flightsArray);
     setNextFlight(nextFlight);
@@ -52,10 +52,8 @@ function Tracker() {
             Find Flight
           </button>
         </form>
-        <div>{flights.length <= 0 ? <h2>Find a Flight</h2> : null}</div>
-        {flights.length <= 0 ? (
-          "No flights currently searched"
-        ) : (
+        <div>{flights == null ? <h2>Find a Flight</h2> : null}</div>
+        {flights == null ? null : (
           <FlightItem nextFlight={nextFlight} flightNumber={ident} />
         )}
       </section>

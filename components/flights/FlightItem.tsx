@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/Tracker.module.css";
 
 const convertDate = (date: Date) => {
   if (date) {

@@ -3,10 +3,10 @@ import { NextApiResponse, NextApiRequest } from "next";
 
 const aeroapiURI = "https://aeroapi.flightaware.com/aeroapi/";
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  const ident = req.query.ident.toUpperCase();
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { ident } = req.query;
 
-  axios
+  await axios
     .get(aeroapiURI + "flights/" + ident, {
       headers: {
         Accept: "application/json; charset=UTF-8",
