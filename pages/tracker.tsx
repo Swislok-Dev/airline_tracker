@@ -36,20 +36,27 @@ function Tracker() {
   return (
     <Layout title="Find A Flight">
       <section>
-        <form onSubmit={(e) => handleOnSubmit(e)}>
+        <form
+          onSubmit={(e) => handleOnSubmit(e)}
+          className=" m-auto mb-4 grid max-w-sm grid-cols-1 gap-2 px-2 sm:max-w-sm md:max-w-md"
+        >
           <label htmlFor="ident">Flight Number</label>
           <input
             type="text"
             name="ident"
             autoFocus
-            className="mx-2 outline"
+            className="w-auto rounded border-2 border-red-500 text-center uppercase"
             required
             onChange={(e) => onChange(e)}
             value={ident}
             placeholder="UA4"
           />
-          <button type="submit" value="Find Flight" className="">
-            Find Flight
+          <button
+            type="submit"
+            value="Find Flight"
+            className="rounded bg-red-500 text-white active:bg-red-400 "
+          >
+            Search
           </button>
         </form>
         <div>{flights == null ? <h2>Find a Flight</h2> : null}</div>

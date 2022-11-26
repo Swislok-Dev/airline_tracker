@@ -15,6 +15,15 @@ a {
   text-decoration: none;
 }
 
+td:nth-child(odd) {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+td:nth-child(even) {
+  border-bottom: 1px solid black;
+}
+
 * {
   box-sizing: border-box;
 }
