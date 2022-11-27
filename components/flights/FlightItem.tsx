@@ -8,6 +8,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
   const getDestinationAirportName = () => {
     return nextFlight.destination.name;
   };
+
   return (
     <div>
       <div>
@@ -37,7 +38,11 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               </tr>
               <tr>
                 <td>Actual Takeoff</td>
-                <td>{convertDate(nextFlight.actual_off)}</td>
+                <td>
+                  {nextFlight.actual_off == null
+                    ? "TBD"
+                    : convertDate(nextFlight.actual_off)}
+                </td>
               </tr>
               <tr>
                 <td>Airport</td>
@@ -45,11 +50,19 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               </tr>
               <tr>
                 <td>Terminal</td>
-                <td>{nextFlight.terminal_origin}</td>
+                <td>
+                  {nextFlight.terminal_origin == null
+                    ? "TBD"
+                    : nextFlight.terminal_origin}
+                </td>
               </tr>
               <tr>
                 <td>Gate</td>
-                <td>{nextFlight.gate_origin}</td>
+                <td>
+                  {nextFlight.gate_origin == null
+                    ? "TBD"
+                    : nextFlight.gate_origin}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -72,7 +85,11 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               )}
               <tr>
                 <td>Actual Arrival</td>
-                <td>{convertDate(nextFlight.actual_on)}</td>
+                <td>
+                  {nextFlight.actual_on == null
+                    ? "TBD"
+                    : convertDate(nextFlight.actual_on)}
+                </td>
               </tr>
               <tr>
                 <td>Airport</td>
@@ -80,11 +97,19 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               </tr>
               <tr>
                 <td>Terminal</td>
-                <td>{nextFlight.terminal_destination}</td>
+                <td>
+                  {nextFlight.terminal_destination == null
+                    ? "TBD"
+                    : nextFlight.terminal_destination}
+                </td>
               </tr>
               <tr>
                 <td>Gate</td>
-                <td>{nextFlight.gate_destination}</td>
+                <td>
+                  {nextFlight.gate_destination == null
+                    ? "TBD"
+                    : nextFlight.gate_destination}
+                </td>
               </tr>
             </tbody>
           </table>
