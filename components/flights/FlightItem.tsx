@@ -3,8 +3,14 @@ import React from "react";
 const convertDate = (date: Date) => {
   if (date) {
     const toDateString = new Date(date);
-    const newDate = toDateString.toUTCString().split("GMT")[0];
-    return newDate;
+    const newDate = toDateString.toLocaleDateString();
+    const newTime = toDateString.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "numeric",
+    });
+
+    const newDateAndTime = newTime + " " + newDate;
+    return newDateAndTime;
   }
 };
 
@@ -23,18 +29,28 @@ function FlightItem({ nextFlight, flightNumber }: any) {
   return (
     <div>
       <div>
-        <h2>
+        <h2 className="m-4 text-2xl font-bold">
           Flight
           <br />
           {flightNumber.toUpperCase()}
         </h2>
-        <h3>{nextFlight.status}</h3>
-        <h4>{placeDate()} UTC</h4>
+        <span className="mt-2 text-xl font-semibold">Flight Status</span>
+        <h3 className="mb-2 text-xl font-semibold">{nextFlight.status}</h3>
+        <h4 className="text-lg font-medium">
+          Current locale time <br />
+          {placeDate()}
+        </h4>
+
+        <span className="text-xl font-semibold">
+          {nextFlight.status === "Scheduled"
+            ? null
+            : `Progress: ${nextFlight.progress_percent}%`}
+        </span>
       </div>
 
       <div className=" items-auto m-auto mt-4 grid justify-center gap-2 px-2 sm:max-w-lg sm:grid-cols-2 md:max-w-2xl md:grid-rows-2 ">
         <div className="m-2 max-w-sm border p-5">
-          <h3 className="mb-4 font-bold">Departure</h3>
+          <h3 className="mb-4 text-xl font-bold">Departure</h3>
           <table className="border-separate border-spacing-1">
             <tbody>
               <tr>
@@ -62,7 +78,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
         </div>
 
         <div className="m-2 max-w-sm border p-4">
-          <h3 className="mb-4 font-bold">Arrival</h3>
+          <h3 className="mb-4 text-xl font-bold">Arrival</h3>
           <table className="border-separate border-spacing-1">
             <tbody>
               {nextFlight.scheduled_on === nextFlight.estimated_on ? (
