@@ -1,5 +1,10 @@
 import Layout from "../components/Layout";
+import Tracker from "./tracker";
 
 export default function Home() {
-  return <Layout title="Home">Home Page</Layout>;
+  return (
+    <Layout>
+      <Tracker />
+    </Layout>
+  );
 }
