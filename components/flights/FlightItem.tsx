@@ -1,23 +1,5 @@
 import React from "react";
-
-const convertDate = (date: Date) => {
-  if (date) {
-    const toDateString = new Date(date);
-    const newDate = toDateString.toLocaleDateString();
-    const newTime = toDateString.toLocaleTimeString([], {
-      hour: "numeric",
-      minute: "numeric",
-    });
-
-    const newDateAndTime = newTime + " " + newDate;
-    return newDateAndTime;
-  }
-};
-
-const placeDate = () => {
-  let date: Date = new Date();
-  return convertDate(date);
-};
+import { convertDate } from "../../components/flights/functions.js";
 
 function FlightItem({ nextFlight, flightNumber }: any) {
   const getOriginAirportName = () => {
@@ -36,10 +18,6 @@ function FlightItem({ nextFlight, flightNumber }: any) {
         </h2>
         <span className="mt-2 text-xl font-semibold">Flight Status</span>
         <h3 className="mb-2 text-xl font-semibold">{nextFlight.status}</h3>
-        <h4 className="text-lg font-medium">
-          Current locale time <br />
-          {placeDate()}
-        </h4>
 
         <span className="text-xl font-semibold">
           {nextFlight.status === "Scheduled"
@@ -48,8 +26,8 @@ function FlightItem({ nextFlight, flightNumber }: any) {
         </span>
       </div>
 
-      <div className=" items-auto m-auto mt-4 grid justify-center gap-2 px-2 sm:max-w-lg sm:grid-cols-2 md:max-w-2xl md:grid-rows-2 ">
-        <div className="m-2 max-w-sm border p-5">
+      <div className=" items-auto m-auto mt-4 grid max-w-2xl grid-rows-2 justify-center gap-2 px-2  sm:grid-cols-2   ">
+        <div className="m-2 border p-5">
           <h3 className="mb-4 text-xl font-bold">Departure</h3>
           <table className="border-separate border-spacing-1">
             <tbody>
@@ -77,7 +55,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
           </table>
         </div>
 
-        <div className="m-2 max-w-sm border p-4">
+        <div className="m-2  border p-4">
           <h3 className="mb-4 text-xl font-bold">Arrival</h3>
           <table className="border-separate border-spacing-1">
             <tbody>

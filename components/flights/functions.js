@@ -17,9 +17,21 @@ export const findNextFlight = (flightsArray) => {
         return currentFlight;
       }
       currentFlight = data[i];
-    } else {
-      console.log("not current flight checking next record");
     }
   }
   return currentFlight;
+};
+
+export const convertDate = (date) => {
+  if (date) {
+    const toDateString = new Date(date);
+    const newDate = toDateString.toLocaleDateString();
+    const newTime = toDateString.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "numeric",
+    });
+
+    const newDateAndTime = newTime + " " + newDate;
+    return newDateAndTime;
+  }
 };
