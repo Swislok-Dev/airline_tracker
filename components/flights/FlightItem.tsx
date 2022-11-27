@@ -42,7 +42,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
                 <td>{convertDate(nextFlight.scheduled_off)}</td>
               </tr>
               <tr>
-                <td>Actuall Takeoff</td>
+                <td>Actual Takeoff</td>
                 <td>{convertDate(nextFlight.actual_off)}</td>
               </tr>
               <tr>
@@ -65,7 +65,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
           <h3 className="mb-4 font-bold">Arrival</h3>
           <table className="border-separate border-spacing-1">
             <tbody>
-              {nextFlight.scheduled_on === nextFlight.estimate_on ? (
+              {nextFlight.scheduled_on === nextFlight.estimated_on ? (
                 <tr>
                   <td>Schedule Arrival</td>
                   <td>{convertDate(nextFlight.scheduled_on)}</td>
