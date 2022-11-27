@@ -15,10 +15,10 @@ const Layout: React.FC<Props> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex-min-h-screen flex-col justify-between">
-        <header className="sticky mb-4 w-full bg-white shadow">
+        <header className="sticky mb-4 w-full bg-white py-4 shadow">
           <nav className="mx-4 flex h-12 items-center justify-center ">
             <div>
-              <Link href="/" className=" text-lg font-bold">
+              <Link href="/" className=" text-3xl font-bold">
                 Flight Tracker
               </Link>
             </div>
