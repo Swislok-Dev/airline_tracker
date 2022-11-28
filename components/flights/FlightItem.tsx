@@ -28,7 +28,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
       </div>
 
       <div className=" items-auto m-auto mt-4 grid max-w-2xl grid-rows-2 justify-center gap-2 px-2  sm:grid-cols-2   ">
-        <div className="m-2 border p-5">
+        <div className="m-2 border p-4">
           <h3 className="mb-4 text-xl font-bold">Departure</h3>
           <table className="border-separate border-spacing-1">
             <tbody>
