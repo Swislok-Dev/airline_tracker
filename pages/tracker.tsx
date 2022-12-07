@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import * as functions from "../components/flights/functions.js";
 import FlightItem from "../components/flights/FlightItem";
+import Spinner from "../components/flights/Spinner";
 
 function Tracker() {
   const [ident, setIdent] = useState("");
   const [flights, setFlights] = useState<AxiosResponse | [] | null | void>();
   const [nextFlight, setNextFlight] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const getFlightInfo = async (ident: string) => {
+    setIsLoading(true);
     const flightsArray = await axios.get(`/api/flight/${ident.toUpperCase()}`);
+    setIsLoading(false);
     setFlights(flightsArray);
     const nextFlight = functions.findNextFlight(flightsArray);
     setNextFlight(nextFlight);
@@ -24,6 +28,10 @@ function Tracker() {
     e.preventDefault();
     return getFlightInfo(ident);
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <section>
