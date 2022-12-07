@@ -36,7 +36,7 @@ function Tracker() {
             "Please Enter a Flight Number"
           ) : (
             <h4 className="text-lg font-medium">
-              Current locale time <br />
+              Current local time <br />
               {functions.convertDate(new Date())}
             </h4>
           )}
