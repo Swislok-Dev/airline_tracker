@@ -19,10 +19,15 @@ function FlightItem({ nextFlight, flightNumber }: any) {
       ) : (
         <div>
           <div>
-            <h2 className="m-4 text-2xl font-bold">
+            <h2
+              className="m-4 text-2xl font-bold"
+              title="this is an internal reference number and may differ from your input"
+            >
               Flight
               <br />
-              {flightNumber.toUpperCase()}
+              {flightNumber === nextFlight.ident
+                ? nextFlight.ident.toUpperCase()
+                : nextFlight.ident_iata.toUpperCase()}
             </h2>
             <span className="mt-2 text-xl font-semibold">Flight Status</span>
             <h3 className="mb-2 text-xl font-semibold">{nextFlight.status}</h3>
@@ -34,7 +39,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
             </span>
           </div>
 
-          <div className=" items-auto m-auto mt-4 grid max-w-2xl grid-rows-2 justify-center gap-2 px-2  sm:grid-cols-2   ">
+          <div className="items-auto m-auto mt-4 grid max-w-2xl grid-rows-2 justify-center gap-2 px-2  sm:grid-cols-2   ">
             <div className="m-2 border p-4">
               <h3 className="mb-4 text-xl font-bold">Departure</h3>
               <table className="border-separate border-spacing-1">
