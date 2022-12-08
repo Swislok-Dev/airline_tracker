@@ -15,6 +15,21 @@ export const findNextFlight = (flightsArray) => {
   }
 };
 
+const dateString = (date) => {
+  return new Date(date);
+};
+
+export const getTime = (date) => {
+  const time = dateString(date).toLocaleTimeString();
+  return time;
+};
+
+export const getDate = (date) => {
+  if (date) {
+    return dateString(date).toDateString();
+  }
+};
+
 export const convertDate = (date) => {
   if (date) {
     const toDateString = new Date(date);
