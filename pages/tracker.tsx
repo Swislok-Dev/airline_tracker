@@ -39,15 +39,8 @@ function Tracker() {
         onSubmit={(e) => handleOnSubmit(e)}
         className=" m-auto mb-4 grid w-auto max-w-sm grid-cols-1 gap-2 px-4  "
       >
-        <label htmlFor="ident">
-          {flights == null ? (
-            "Please Enter a Flight Number"
-          ) : (
-            <h4 className="text-lg font-medium">
-              Current local time <br />
-              {functions.convertDate(new Date())}
-            </h4>
-          )}
+        <label className="text-white" htmlFor="ident">
+          {flights == null ? "Please Enter a Flight Number" : null}
         </label>
         <input
           type="text"

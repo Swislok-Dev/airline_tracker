@@ -32,7 +32,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
             </div>
           </div>
           <div className="flex">
-            <span className="text-xl font-semibold">
+            <span className="m-auto pt-5 text-xl font-semibold text-white">
               {nextFlight.status === "Scheduled"
                 ? null
                 : `Progress: ${nextFlight.progress_percent}%`}

@@ -15,7 +15,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex-min-h-screen flex-col justify-between">
-        <header className="sticky mb-4 w-full bg-white py-4 shadow">
+        <header className="sticky mb-4 w-full bg-transparent py-4 text-white shadow">
           <nav className="mx-4 flex h-12 items-center justify-center ">
             <div>
               <Link href="/" className=" text-3xl font-bold">
