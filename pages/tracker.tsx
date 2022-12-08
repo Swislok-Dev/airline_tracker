@@ -67,7 +67,7 @@ function Tracker() {
           Search
         </button>
       </form>
-      <div>{flights == null ? <h2>Find a Flight</h2> : null}</div>
+
       {flights == null ? null : (
         <FlightItem nextFlight={nextFlight} flightNumber={ident} />
       )}
