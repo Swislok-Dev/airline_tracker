@@ -8,33 +8,35 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* background-color: rgb(2, 0, 36);
+
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 24%,
+    rgba(0, 212, 255, 1) 85%
+  ); */
 }
+
+/* body {
+  height: 100%;
+  background-color: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 24%,
+    rgba(0, 212, 255, 1) 85%
+  );
+} */
 
 a {
   color: inherit;
   text-decoration: none;
 }
 
-td {
-  text-align: left;
-  margin-right: 30px;
-  padding-right: 35px;
-  width: 50%;
-}
-
-td:nth-child(odd) {
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-}
-
-td:nth-child(even) {
-  border-bottom: 1px solid black;
-}
-
 * {
   box-sizing: border-box;
 }
-
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;
