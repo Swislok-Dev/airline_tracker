@@ -1,7 +1,39 @@
+.flight-ticket {
+  background-color: rgba(1, 1, 1, 0.4);
+  margin-top: 25px;
+  padding-bottom: 10px;
+}
+
+.flight-status {
+  padding: 16px;
+  color: white;
+}
+
+.flight-status.scheduled {
+  background-color: rgb(43, 206, 251);
+  color: black;
+}
+.flight-status.on-time {
+  background-color: rgb(43, 251, 43);
+  color: black;
+}
+.flight-status.delayed {
+  background-color: rgb(247, 251, 43);
+  color: black;
+}
+.flight-status.arrived {
+  background-color: rgb(71, 43, 251);
+  color: white;
+}
+.flight-status.cancelled {
+  background-color: rgb(251, 43, 43);
+}
+
 .card {
   display: flex;
   flex-direction: column;
-  background-color: aqua;
+  background-color: #dff;
+  filter: blur(50%);
   margin: 25px 10px;
   border-radius: 5px;
 }

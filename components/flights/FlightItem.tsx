@@ -10,6 +10,15 @@ function FlightItem({ nextFlight, flightNumber }: any) {
     return nextFlight.destination.name;
   };
 
+  const showFlightStatus = (status: any) => {
+    if (status.includes("Scheduled")) return "scheduled";
+    if (status.includes("On Time")) return "on-time";
+    if (status.includes("Delayed")) return "delayed";
+    if (status.includes("Arrived") || status.includes("Landed"))
+      return "arrived";
+    if (status.includes("Cancelled")) return "cancelled";
+  };
+
   return (
     <>
       {nextFlight === undefined ? (
@@ -18,9 +27,11 @@ function FlightItem({ nextFlight, flightNumber }: any) {
           <p>Please check your flight number</p>
         </div>
       ) : (
-        <div className="border-2 border-red-300">
+        <div className="flight-ticket">
           <div className="flex flex-col text-left shadow">
-            <div className=" bg-lime-300 p-4">
+            <div
+              className={"flight-status " + showFlightStatus(nextFlight.status)}
+            >
               <h3>{nextFlight.status}</h3>
             </div>
             <div className="bg-blue-400 p-4">
