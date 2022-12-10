@@ -21,7 +21,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
   return (
     <>
       {nextFlight === undefined ? (
-        <div>
+        <div className="text-white">
           <p>Flight not found</p>
           <p>Please check your flight number</p>
         </div>
