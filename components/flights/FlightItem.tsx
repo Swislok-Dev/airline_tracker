@@ -9,6 +9,14 @@ function FlightItem({ nextFlight, flightNumber }: any) {
     return nextFlight.destination.name;
   };
 
+  const checkNullValue = (flight: any) => {
+    if (flight === null) {
+      return "N/A";
+    } else {
+      return flight;
+    }
+  };
+
   const showFlightStatus = (status: any) => {
     if (status === "Scheduled") return "scheduled";
     if (status.includes("On Time")) return "on-time";
@@ -79,11 +87,11 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               <div className="terminal-info">
                 <div className="terminal">
                   <h3>Terminal</h3>
-                  <span>{nextFlight.terminal_origin}</span>
+                  <span>{checkNullValue(nextFlight.terminal_origin)}</span>
                 </div>
                 <div className="gate">
                   <h3>Gate</h3>
-                  <span>{nextFlight.gate_origin}</span>
+                  <span>{checkNullValue(nextFlight.gate_origin)}</span>
                 </div>
               </div>
             </div>
@@ -119,11 +127,11 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               <div className="terminal-info">
                 <div className="terminal">
                   <h3>Terminal</h3>
-                  <span>{nextFlight.terminal_destination}</span>
+                  <span>{checkNullValue(nextFlight.terminal_destination)}</span>
                 </div>
                 <div className="gate">
                   <h3>Gate</h3>
-                  <span>{nextFlight.gate_destination}</span>
+                  <span>{checkNullValue(nextFlight.gate_destination)}</span>
                 </div>
                 {nextFlight.baggage_claim !== null ? (
                   <div className="baggage-claim">
