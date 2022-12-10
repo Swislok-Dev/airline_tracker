@@ -2,7 +2,6 @@ import React from "react";
 import { getDate, getTime } from "../../components/flights/functions.js";
 
 function FlightItem({ nextFlight, flightNumber }: any) {
-  console.log(nextFlight);
   const getOriginAirportName = () => {
     return nextFlight.origin.name;
   };
@@ -11,7 +10,7 @@ function FlightItem({ nextFlight, flightNumber }: any) {
   };
 
   const showFlightStatus = (status: any) => {
-    if (status.includes("Scheduled")) return "scheduled";
+    if (status === "Scheduled") return "scheduled";
     if (status.includes("On Time")) return "on-time";
     if (status.includes("Delayed")) return "delayed";
     if (status.includes("Arrived") || status.includes("Landed"))
