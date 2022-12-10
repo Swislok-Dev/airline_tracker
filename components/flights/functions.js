@@ -2,6 +2,12 @@ export const convertISOTimeToDateTime = (time) => {
   return new Date(time);
 };
 
+const arrivedOrLanded = (flight) => {
+  return flight.status.includes("Landed") || flight.status.includes("Arrived")
+    ? true
+    : false;
+};
+
 export const findNextFlight = (flightsArray) => {
   const { data } = flightsArray;
 
@@ -9,7 +15,7 @@ export const findNextFlight = (flightsArray) => {
     let nextFlight = data[i + 1];
     let currentFlight = data[i];
 
-    if (nextFlight.status.includes("Arrived")) {
+    if (arrivedOrLanded(nextFlight)) {
       return currentFlight;
     }
   }
