@@ -21,6 +21,41 @@ export const findNextFlight = (flightsArray) => {
   }
 };
 
+export function checkFlightStatus(status) {
+  if (status.includes("Taxiing")) {
+    if (status.includes("Delayed")) {
+      return "taxiing delayed";
+    }
+    return "taxiing";
+  }
+  if (status.includes("Scheduled")) {
+    if (status.includes("Delayed")) {
+      return "scheduled delayed";
+    }
+    return "scheduled";
+  }
+
+  if (status.includes("En Route")) {
+    if (status.includes("On Time")) {
+      return "enroute on-time";
+    }
+    if (status.includes("Delayed")) {
+      return "enroute delayed";
+    }
+    return "enroute";
+  }
+
+  if (status.includes("Arrived") || status.includes("Landed")) {
+    return "arrived";
+  }
+
+  if (status.includes("Cancelled")) {
+    return "cancelled";
+  }
+
+  return "scheduled";
+}
+
 const dateString = (date) => {
   return new Date(date);
 };

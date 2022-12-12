@@ -1,5 +1,6 @@
 import React from "react";
 import { getDate, getTime } from "../../components/flights/functions.js";
+import * as functions from "../flights/functions";
 
 function FlightItem({ nextFlight, flightNumber }: any) {
   const getOriginAirportName = () => {
@@ -17,15 +18,6 @@ function FlightItem({ nextFlight, flightNumber }: any) {
     }
   };
 
-  const showFlightStatus = (status: any) => {
-    if (status === "Scheduled") return "scheduled";
-    if (status.includes("On Time")) return "on-time";
-    if (status.includes("Delayed")) return "delayed";
-    if (status.includes("Arrived") || status.includes("Landed"))
-      return "arrived";
-    if (status.includes("Cancelled")) return "cancelled";
-  };
-
   return (
     <>
       {nextFlight === undefined ? (
@@ -37,9 +29,13 @@ function FlightItem({ nextFlight, flightNumber }: any) {
         <div className="flight-ticket">
           <div className="flex flex-col text-left shadow">
             <div
-              className={"flight-status " + showFlightStatus(nextFlight.status)}
+              className={
+                "flight-status " +
+                functions.checkFlightStatus(nextFlight.status)
+              }
             >
-              <h3>{nextFlight.status}</h3>
+              <h3>{`${nextFlight.status}`}</h3>
+              <span></span>
             </div>
             <div className="bg-blue-400 p-4">
               <h2 title="this is an internal reference number and may differ from your input">
