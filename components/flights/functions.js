@@ -28,6 +28,11 @@ export function checkFlightStatus(status) {
     }
     return "taxiing";
   }
+
+  if (status === "Delayed") {
+    return "delayed";
+  }
+
   if (status.includes("Scheduled")) {
     if (status.includes("Delayed")) {
       return "scheduled delayed";

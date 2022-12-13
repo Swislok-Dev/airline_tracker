@@ -42,6 +42,11 @@
   );
 }
 
+.flight-status.delayed {
+  background-color: var(--delayed);
+  color: black;
+}
+
 .flight-status.scheduled {
   background-color: var(--scheduled);
   color: black;
