@@ -7,6 +7,33 @@
   --landed-arrived: rgb(71, 43, 251);
 }
 
+#progress {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+  margin-top: 25px;
+}
+
+#progress-bar {
+  color: white;
+  width: 50%;
+  align-self: center;
+  background-color: gray;
+  height: 0.25em;
+}
+
+#progress-bar > span {
+  position: relative;
+  display: flex;
+  align-self: center;
+  background-color: greenyellow;
+  visibility: hidden;
+  overflow: hidden;
+  z-index: 1;
+  height: 0.25em;
+}
+
 .flight-ticket {
   background-color: rgba(1, 1, 1, 0.4);
   margin-top: 25px;

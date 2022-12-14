@@ -45,12 +45,19 @@ function FlightItem({ nextFlight, flightNumber }: any) {
               </h2>
             </div>
           </div>
-          <div className="flex">
-            <span className="m-auto pt-5 text-xl font-semibold text-white">
-              {nextFlight.status === "Scheduled"
-                ? null
-                : `Progress: ${nextFlight.progress_percent}%`}
-            </span>
+          <div id="progress" className="flex text-white">
+            <h2>{nextFlight.origin.code_iata}</h2>
+            <div id="progress-bar">
+              <span
+                style={{
+                  visibility: "visible",
+                  width: `${Number(nextFlight.progress_percent)}%`,
+                }}
+              >
+                progress
+              </span>
+            </div>
+            <h2>{nextFlight.destination.code_iata}</h2>
           </div>
 
           <div>
