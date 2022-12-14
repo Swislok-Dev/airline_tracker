@@ -8,6 +8,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await axios
     .get(aeroapiURI + "flights/" + ident, {
+      validateStatus: function (status) {
+        return status < 500;
+      },
       headers: {
         Accept: "application/json; charset=UTF-8",
         "x-apikey": process.env.aeroapiKey,
