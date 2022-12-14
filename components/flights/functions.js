@@ -1,11 +1,32 @@
 export const convertISOTimeToDateTime = (time) => {
   return new Date(time);
 };
+const flightScheduled = [
+  "Scheduled",
+  "Scheduled / Delayed",
+  "Delayed",
+  "En Route / Delayed",
+  "En Route / On Time",
+  "Taxiing",
+  "Taxiing / Delayed",
+  "En Route",
+];
 
-const arrivedOrLanded = (flight) => {
-  return flight.status.includes("Landed") || flight.status.includes("Arrived")
-    ? true
-    : false;
+const nextScheduledFlight = (currentFlight, nextFlight) => {
+  if (
+    nextFlight.actual_off === null &&
+    !nextFlight.status.includes("Cancelled")
+  ) {
+    return false;
+  }
+  if (
+    nextFlight.actual_off !== null &&
+    flightScheduled.includes(nextFlight.status)
+  ) {
+    return false;
+  }
+
+  return true;
 };
 
 export const findNextFlight = (flightsArray) => {
@@ -15,7 +36,7 @@ export const findNextFlight = (flightsArray) => {
     let nextFlight = data[i + 1];
     let currentFlight = data[i];
 
-    if (arrivedOrLanded(nextFlight)) {
+    if (nextScheduledFlight(currentFlight, nextFlight)) {
       return currentFlight;
     }
   }
