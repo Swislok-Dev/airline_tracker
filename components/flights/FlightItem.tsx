@@ -27,6 +27,10 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
     }
   };
 
+  const returnToCurrentFlight = () => {
+    setDisplayCurrentFlight(currentFlight);
+  };
+
   const getOriginAirportName = () => {
     return displayCurrentFlight.origin.name;
   };
@@ -84,12 +88,17 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
             <h2>{displayCurrentFlight.destination.code_iata}</h2>
           </div>
 
-          <div className="m-3 flex justify-between px-4 text-2xl text-white">
+          <div className="m-3 flex justify-between px-4 text-3xl text-white">
             <button onClick={getNextFlight}>{<FaArrowCircleLeft />}</button>
             {displayCurrentFlight == currentFlight ? (
               <p>Current Flight</p>
             ) : (
-              <p>{displayCurrentFlight._id}</p>
+              <button
+                onClick={returnToCurrentFlight}
+                className="rounded bg-white p-1 text-lg text-black shadow hover:bg-gray-300 active:bg-gray-500"
+              >
+                Return to current flight
+              </button>
             )}
             <button onClick={getPreviousFlight}>
               {<FaArrowCircleRight />}
