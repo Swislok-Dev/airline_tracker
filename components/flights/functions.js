@@ -29,7 +29,7 @@ const nextScheduledFlight = (currentFlight, nextFlight) => {
   return true;
 };
 
-export const findNextFlight = (flightsArray) => {
+export const findCurrentFlight = (flightsArray) => {
   const { data } = flightsArray;
 
   for (let i = 0; i < data.length; i++) {

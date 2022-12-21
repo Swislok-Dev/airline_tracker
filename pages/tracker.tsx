@@ -7,7 +7,7 @@ import Spinner from "../components/flights/Spinner";
 function Tracker() {
   const [ident, setIdent] = useState("");
   const [flights, setFlights] = useState<AxiosResponse | [] | null | void>();
-  const [nextFlight, setNextFlight] = useState({});
+  const [currentFlight, setCurrentFlight] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const getFlightInfo = async (ident: string) => {
@@ -15,9 +15,9 @@ function Tracker() {
     const flightsArray = await axios.get(`/api/flight/${ident.toUpperCase()}`);
     setIsLoading(false);
     setFlights(flightsArray);
-    const nextFlight = functions.findNextFlight(flightsArray);
-    setNextFlight(nextFlight);
-    return nextFlight;
+    const currentFlight = functions.findCurrentFlight(flightsArray);
+    setCurrentFlight(currentFlight);
+    return currentFlight;
   };
 
   const onChange = (e: any) => {
@@ -62,7 +62,7 @@ function Tracker() {
       </form>
 
       {flights == null ? null : (
-        <FlightItem nextFlight={nextFlight} flightNumber={ident} />
+        <FlightItem currentFlight={currentFlight} flights={flights} flightNumber={ident} />
       )}
     </section>
   );
