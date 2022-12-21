@@ -62,15 +62,15 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
                 functions.checkFlightStatus(displayCurrentFlight.status)
               }
             >
-              <h3>{`${displayCurrentFlight.status}`}</h3>
+              <h2>{`${displayCurrentFlight.status}`}</h2>
               <span></span>
             </div>
             <div className="flex justify-between bg-blue-400 p-4">
-              <h2 title="this is an internal reference number and may differ from your input">
+              <h3 title="this is an internal reference number and may differ from your input">
                 {flightNumber === currentFlight.ident
                   ? currentFlight.ident.toUpperCase()
                   : currentFlight.ident_iata.toUpperCase()}
-              </h2>
+              </h3>
             </div>
           </div>
           <div id="progress" className="flex text-white">
