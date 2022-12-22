@@ -6,11 +6,27 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 function FlightItem({ currentFlight, flightNumber, flights }: any) {
   const [displayCurrentFlight, setDisplayCurrentFlight] =
     useState(currentFlight);
+  const {
+    scheduled_off,
+    scheduled_on,
+    estimated_off,
+    estimated_on,
+    origin,
+    destination,
+    actual_on,
+    actual_off,
+    status,
+    terminal_origin,
+    terminal_destination,
+    gate_origin,
+    gate_destination,
+    baggage_claim,
+    progress_percent,
+  } = displayCurrentFlight;
 
   const getFlightIndex = (flight: any) => {
     return flights.data.indexOf(flight);
   };
-
 
   let index = getFlightIndex(displayCurrentFlight);
 
@@ -29,13 +45,6 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
 
   const returnToCurrentFlight = () => {
     setDisplayCurrentFlight(currentFlight);
-  };
-
-  const getOriginAirportName = () => {
-    return displayCurrentFlight.origin.name;
-  };
-  const getDestinationAirportName = () => {
-    return displayCurrentFlight.destination.name;
   };
 
   const checkNullValue = (flight: any) => {
@@ -57,12 +66,9 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
         <div className="flight-ticket">
           <div className="flex flex-col text-left shadow">
             <div
-              className={
-                "flight-status " +
-                functions.checkFlightStatus(displayCurrentFlight.status)
-              }
+              className={"flight-status " + functions.checkFlightStatus(status)}
             >
-              <h2>{`${displayCurrentFlight.status}`}</h2>
+              <h2>{`${status}`}</h2>
               <span></span>
             </div>
             <div className="flex justify-between bg-blue-400 p-4">
@@ -74,18 +80,18 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
             </div>
           </div>
           <div id="progress" className="flex text-white">
-            <h2>{displayCurrentFlight.origin.code_iata}</h2>
+            <h2>{origin.code_iata}</h2>
             <div id="progress-bar">
               <span
                 style={{
                   visibility: "visible",
-                  width: `${Number(displayCurrentFlight.progress_percent)}%`,
+                  width: `${Number(progress_percent)}%`,
                 }}
               >
                 progress
               </span>
             </div>
-            <h2>{displayCurrentFlight.destination.code_iata}</h2>
+            <h2>{destination.code_iata}</h2>
           </div>
 
           <div className="m-3 flex justify-between px-4 text-3xl text-white">
@@ -107,28 +113,27 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
 
           <div>
             <div className="card">
-              <h2 className="iata-code">
-                {displayCurrentFlight.origin.code_iata}
-              </h2>
-              <span className="airport-name">{getOriginAirportName()}</span>
+              <h2 className="iata-code">{origin.code_iata}</h2>
+              <span className="airport-name">{origin.name}</span>
               <h3>Departure Times</h3>
-              <span>{getDate(displayCurrentFlight.scheduled_off)}</span>
+              <span>{getDate(scheduled_off)}</span>
               <div className="flight-times">
                 <div>
                   <h3>Scheduled</h3>
-                  <span>{getTime(displayCurrentFlight.scheduled_off)}</span>
+
+                  <span>{getTime(scheduled_off)}</span>
                 </div>
                 <div>
-                  {displayCurrentFlight.status.includes("En Route") ? (
+                  {status.includes("En Route") ? (
                     <div>
                       <h3>Actual</h3>
 
-                      <span>{getTime(displayCurrentFlight.actual_off)}</span>
+                      <span>{getTime(actual_off)}</span>
                     </div>
                   ) : (
                     <div>
                       <h3>Estimated</h3>
-                      <span>{getTime(displayCurrentFlight.estimated_off)}</span>
+                      <span>{getTime(estimated_off)}</span>
                     </div>
                   )}
                 </div>
@@ -137,44 +142,36 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
               <div className="terminal-info">
                 <div className="terminal">
                   <h3>Terminal</h3>
-                  <span>
-                    {checkNullValue(displayCurrentFlight.terminal_origin)}
-                  </span>
+                  <span>{checkNullValue(terminal_origin)}</span>
                 </div>
                 <div className="gate">
                   <h3>Gate</h3>
-                  <span>
-                    {checkNullValue(displayCurrentFlight.gate_origin)}
-                  </span>
+                  <span>{checkNullValue(gate_origin)}</span>
                 </div>
               </div>
             </div>
 
             <div className="card">
-              <h2 className="iata-code">
-                {displayCurrentFlight.destination.code_iata}
-              </h2>
-              <span className="airport-name">
-                {getDestinationAirportName()}
-              </span>
+              <h2 className="iata-code">{destination.code_iata}</h2>
+              <span className="airport-name">{destination.name}</span>
               <h3>Arrival Times</h3>
-              <span>{getDate(displayCurrentFlight.scheduled_on)}</span>
+              <span>{getDate(scheduled_on)}</span>
               <div className="flight-times">
                 <div>
                   <h3>Scheduled</h3>
-                  <span>{getTime(displayCurrentFlight.scheduled_on)}</span>
+                  <span>{getTime(scheduled_on)}</span>
                 </div>
                 <div>
-                  {displayCurrentFlight.status.includes("Arrived") ? (
+                  {status.includes("Arrived") ? (
                     <div>
                       <h3>Actual</h3>
 
-                      <span>{getTime(displayCurrentFlight.actual_on)}</span>
+                      <span>{getTime(actual_on)}</span>
                     </div>
                   ) : (
                     <div>
                       <h3>Estimated</h3>
-                      <span>{getTime(displayCurrentFlight.estimated_on)}</span>
+                      <span>{getTime(estimated_on)}</span>
                     </div>
                   )}
                 </div>
@@ -183,20 +180,16 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
               <div className="terminal-info">
                 <div className="terminal">
                   <h3>Terminal</h3>
-                  <span>
-                    {checkNullValue(displayCurrentFlight.terminal_destination)}
-                  </span>
+                  <span>{checkNullValue(terminal_destination)}</span>
                 </div>
                 <div className="gate">
                   <h3>Gate</h3>
-                  <span>
-                    {checkNullValue(displayCurrentFlight.gate_destination)}
-                  </span>
+                  <span>{checkNullValue(gate_destination)}</span>
                 </div>
-                {displayCurrentFlight.baggage_claim !== null ? (
+                {baggage_claim !== null ? (
                   <div className="baggage-claim">
                     <h3>Baggage</h3>
-                    <span>{displayCurrentFlight.baggage_claim}</span>
+                    <span>{baggage_claim}</span>
                   </div>
                 ) : null}
               </div>
