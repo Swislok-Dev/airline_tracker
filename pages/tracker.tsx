@@ -61,8 +61,12 @@ function Tracker() {
         </button>
       </form>
 
-      {flights == null ? null : (
-        <FlightItem currentFlight={currentFlight} flights={flights} flightNumber={ident} />
+      {currentFlight == null || flights == undefined ? null : (
+        <FlightItem
+          currentFlight={currentFlight}
+          flights={flights}
+          flightNumber={ident}
+        />
       )}
     </section>
   );
