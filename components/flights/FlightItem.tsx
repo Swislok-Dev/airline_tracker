@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { getDate, getTime } from "../../components/flights/functions.js";
+import {
+  convertTZ,
+  getDate,
+  getTime,
+} from "../../components/flights/functions.js";
 import * as functions from "../flights/functions";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
@@ -23,6 +27,7 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
     baggage_claim,
     progress_percent,
   } = displayCurrentFlight;
+  const [isLocalTime, setIsShowLocalTime] = useState(true);
 
   const getFlightIndex = (flight: any) => {
     return flights.data.indexOf(flight);
@@ -55,6 +60,19 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
     }
   };
 
+  const showLocalTimezone = () => {
+    setIsShowLocalTime(!isLocalTime);
+  };
+
+  const toggleTimezones = (date: Date, location: any) => {
+    if (isLocalTime) {
+      return getTime(date);
+    } else {
+      return getTime(convertTZ(date, location.timezone));
+    }
+  };
+
+
   return (
     <>
       {currentFlight === undefined ? (
@@ -77,6 +95,12 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
                   ? currentFlight.ident.toUpperCase()
                   : currentFlight.ident_iata.toUpperCase()}
               </h3>
+              <button
+                onClick={showLocalTimezone}
+                className={"rounded bg-gray-400 p-1 "}
+              >
+                {isLocalTime ? "local time" : "timezone"}
+              </button>
             </div>
           </div>
           <div id="progress" className="flex text-white">
@@ -120,20 +144,18 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
               <div className="flight-times">
                 <div>
                   <h3>Scheduled</h3>
-
-                  <span>{getTime(scheduled_off)}</span>
+                  <span>{toggleTimezones(scheduled_off, origin)}</span>
                 </div>
                 <div>
                   {status.includes("En Route") ? (
                     <div>
                       <h3>Actual</h3>
-
-                      <span>{getTime(actual_off)}</span>
+                      <span>{toggleTimezones(actual_off, origin)}</span>
                     </div>
                   ) : (
                     <div>
                       <h3>Estimated</h3>
-                      <span>{getTime(estimated_off)}</span>
+                      <span>{toggleTimezones(estimated_off, origin)}</span>
                     </div>
                   )}
                 </div>
@@ -159,19 +181,19 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
               <div className="flight-times">
                 <div>
                   <h3>Scheduled</h3>
-                  <span>{getTime(scheduled_on)}</span>
+                  <span>{toggleTimezones(scheduled_on, destination)}</span>
                 </div>
                 <div>
                   {status.includes("Arrived") ? (
                     <div>
                       <h3>Actual</h3>
 
-                      <span>{getTime(actual_on)}</span>
+                      <span>{toggleTimezones(actual_on, destination)}</span>
                     </div>
                   ) : (
                     <div>
                       <h3>Estimated</h3>
-                      <span>{getTime(estimated_on)}</span>
+                      <span>{toggleTimezones(estimated_on, destination)}</span>
                     </div>
                   )}
                 </div>
