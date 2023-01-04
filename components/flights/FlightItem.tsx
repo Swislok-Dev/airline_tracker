@@ -121,7 +121,7 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
           <div className="m-3 flex justify-between px-4 text-3xl text-white">
             <button onClick={getNextFlight}>{<FaArrowCircleLeft />}</button>
             {displayCurrentFlight == currentFlight ? (
-              <p>Current Flight</p>
+              null
             ) : (
               <button
                 onClick={returnToCurrentFlight}
