@@ -105,6 +105,15 @@
   background-color: rgb(71, 43, 251);
   color: white;
 }
+.flight-status.arrived.delayed {
+  background-color: var(--landed-arrived);
+  background-image: linear-gradient(
+    130deg,
+    var(--landed-arrived) 70%,
+    var(--delayed) 30%
+  );
+  color: white;
+}
 .flight-status.cancelled {
   background-color: rgb(251, 43, 43);
 }

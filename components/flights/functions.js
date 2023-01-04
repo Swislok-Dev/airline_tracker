@@ -72,6 +72,9 @@ export function checkFlightStatus(status) {
   }
 
   if (status.includes("Arrived") || status.includes("Landed")) {
+    if (status.includes("Delayed")) {
+      return"arrived delayed"
+    }
     return "arrived";
   }
 
