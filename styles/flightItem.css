@@ -36,8 +36,9 @@
 
 .flight-ticket {
   background-color: rgba(1, 1, 1, 0.4);
-  margin-top: 25px;
+  margin: 25px auto;
   padding-bottom: 10px;
+  max-width: 768px;
 }
 
 .flight-status {
