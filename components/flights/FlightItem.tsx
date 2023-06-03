@@ -72,7 +72,6 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
     }
   };
 
-
   return (
     <>
       {currentFlight === undefined ? (
@@ -87,20 +86,16 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
               className={"flight-status " + functions.checkFlightStatus(status)}
             >
               <h2>{`${status}`}</h2>
-              <span></span>
-            </div>
-            <div className="flex justify-between bg-blue-400 p-4">
-              <h3 title="this is an internal reference number and may differ from your input">
+              <span
+                className={
+                  status.includes("Delayed") ? "text-black" : undefined
+                }
+                title="this is an internal reference number and may differ from your input"
+              >
                 {flightNumber === currentFlight.ident
                   ? currentFlight.ident.toUpperCase()
                   : currentFlight.ident_iata.toUpperCase()}
-              </h3>
-              <button
-                onClick={showLocalTimezone}
-                className={"rounded bg-gray-400 p-1 "}
-              >
-                {isLocalTime ? "local time" : "timezone"}
-              </button>
+              </span>
             </div>
           </div>
           <div id="progress" className="flex text-white">
@@ -120,9 +115,7 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
 
           <div className="m-3 flex justify-between px-4 text-3xl text-white">
             <button onClick={getNextFlight}>{<FaArrowCircleLeft />}</button>
-            {displayCurrentFlight == currentFlight ? (
-              null
-            ) : (
+            {displayCurrentFlight == currentFlight ? null : (
               <button
                 onClick={returnToCurrentFlight}
                 className="rounded bg-white p-1 text-lg text-black shadow hover:bg-gray-300 active:bg-gray-500"
@@ -134,7 +127,14 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
               {<FaArrowCircleRight />}
             </button>
           </div>
-
+          <button
+            onClick={showLocalTimezone}
+            className={
+              "sticky top-0.5  m-auto mt-4 w-3/4 rounded bg-gray-400 p-3"
+            }
+          >
+            {isLocalTime ? "Local Time" : "Timezone"}
+          </button>
           <div>
             <div className="card">
               <h2 className="iata-code">{origin.code_iata}</h2>
