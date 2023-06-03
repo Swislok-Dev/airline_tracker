@@ -41,6 +41,12 @@
   max-width: 768px;
 }
 
+@media screen and (max-width: 640px) {
+  .flight-ticket {
+    margin-bottom: 0;
+  }
+}
+
 .flight-status {
   display: flex;
   align-items: center;
