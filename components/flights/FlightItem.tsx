@@ -147,7 +147,7 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
                   <span>{toggleTimezones(scheduled_off, origin)}</span>
                 </div>
                 <div>
-                  {status.includes("En Route") ? (
+                  {actual_off !== null ? (
                     <div>
                       <h3>Actual</h3>
                       <span>{toggleTimezones(actual_off, origin)}</span>
@@ -184,7 +184,7 @@ function FlightItem({ currentFlight, flightNumber, flights }: any) {
                   <span>{toggleTimezones(scheduled_on, destination)}</span>
                 </div>
                 <div>
-                  {status.includes("Arrived") ? (
+                  {actual_off !== null ? (
                     <div>
                       <h3>Actual</h3>
 
