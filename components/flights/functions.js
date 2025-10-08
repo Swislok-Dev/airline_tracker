@@ -115,6 +115,11 @@ export const convertDate = (date) => {
 };
 
 export const convertTZ = (date, tzString) => {
+  console.table(date, tzString)
+  if (!date) {
+    return
+  }
+  // TODO: make sure this is showing estimated time before calculating
   return new Date(
     (typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {
       timeZone: tzString,

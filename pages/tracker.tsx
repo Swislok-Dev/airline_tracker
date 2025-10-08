@@ -47,7 +47,7 @@ function Tracker() {
             type="text"
             name="ident"
             autoFocus
-            className="w-3/4 rounded border-2 border-red-500 text-center uppercase"
+            className="w-3/4 text-black bg-white rounded border-2 border-red-500 text-center uppercase"
             required
             onChange={(e) => onChange(e)}
             value={ident}
