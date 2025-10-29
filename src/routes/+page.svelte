@@ -1,7 +1,7 @@
 <script>
-	import FlightItem from '../components/flights/flightItem.svelte';
+	import FlightTicket from '../components/flights/flightTicket.svelte';
 	import SearchForm from '../components/searchForm.svelte';
 </script>
 
 <SearchForm />
-<FlightItem />
+<FlightTicket />

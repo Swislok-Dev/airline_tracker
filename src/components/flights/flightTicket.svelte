@@ -1,7 +1,7 @@
 <script>
-	import FlightCard from "./flightCard.svelte";
-
+	import FlightCard from './flightCard.svelte';
 </script>
+
 <section id="flight-ticket">
 	<div class="outbound flight">
 		<div id="flight-status" class="scheduled">
@@ -29,8 +29,8 @@
 
 	<div class="inbound flight"></div>
 
-  <FlightCard />
-
+	<FlightCard departureOrArrival="Departure" />
+	<FlightCard departureOrArrival="Arrival" />
 </section>
 
 <style>
@@ -78,7 +78,7 @@
 	}
 
 	@media screen and (max-width: 640px) {
-		.flight-ticket {
+		#flight-ticket {
 			margin-bottom: 0;
 		}
 	}
@@ -166,55 +166,5 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	.card {
-		display: flex;
-		flex-direction: column;
-		background-color: #dff;
-		filter: blur(50%);
-		margin: 25px 10px;
-		border-radius: 5px;
-	}
-
-	.card > h3 {
-		text-decoration: underline;
-	}
-
-	.iata-code {
-		margin: 1rem 0;
-		font-size: 26px;
-	}
-
-	/* Cards */
-
-	#flight-times {
-		display: flex;
-		margin: 10px 0;
-		justify-content: space-around;
-	}
-
-	#flight-times span {
-		font-weight: 500;
-	}
-
-	#flight-times h3 {
-		font-weight: 300;
-	}
-
-	#terminal-info {
-		display: flex;
-		outline: none;
-		justify-content: space-around;
-		border-top: 1px solid black;
-		margin: 10px 0;
-	}
-
-	#terminal-info h3 {
-		font-weight: 300;
-	}
-
-	#terminal-info span {
-		font-weight: 600;
 	}
 </style>
