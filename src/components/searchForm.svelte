@@ -6,7 +6,7 @@
 			type="text"
 			name="ident"
 			required
-			placeholder="ua4"
+			placeholder="ua3"
 		/>
 		<button
 			id="search-button"
@@ -28,27 +28,54 @@
 		align-items: center;
 		margin: auto;
 		width: 100%;
-		gap: 2rem;
+		gap: 1rem;
 	}
 	form {
 		padding: 0 0.5rem;
-    width: 75%;
+		width: 95%;
 		max-width: 28rem;
 	}
 
 	#search-input {
 		display: flex;
 		flex-direction: row;
-		flex-grow: 1;
+		justify-content: center;
 		gap: 5px;
+		width: 100%;
 	}
 
-	#search-input input {
-		max-width: 100%;
+	@media (max-width: 450px) {
+		#search-input {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	input {
+		font-size: 1rem;
+		flex-grow: 3;
+		width: 75%;
 		margin: auto;
 		padding: 5px;
 		text-align: center;
-		text-transform: capitalize;
+		text-transform: uppercase;
+		border-color: red;
+		border-radius: 0.25rem;
+	}
+
+  input::placeholder {
+    opacity: 30%;
+  }
+
+	button {
+		padding: 5px;
+		flex-shrink: 4;
+		width: 75%;
+		border: none;
+		background-color: red;
+		color: white;
+		border-radius: 0.25rem;
+		font-size: 100%;
 	}
 
 	label {
