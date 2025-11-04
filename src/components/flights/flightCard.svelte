@@ -1,16 +1,41 @@
+<script>
+	let { departureOrArrival } = $props();
+</script>
+
 <section id="flight-cards">
 	<div class="card">
 		<h2 title="origin.code_iata" class="iata-code">
-			origin.code_iata
+			{departureOrArrival}
 		</h2>
 		<span class="airport-name">origin.name</span>
 		<h3>Departure Times</h3>
-		<span>scheduled_time</span>
+		<span>scheduled_datetime</span>
 		<div class="flight-times">
 			<div>
 				<h3>Scheduled</h3>
 				<span>toggle_times</span>
 			</div>
+			<div>
+				<h3>Estimated/Actual</h3>
+				<span>toggle_times</span>
+			</div>
+		</div>
+
+		<div class="terminal-info">
+			<div class="terminal">
+				<h3>Terminal</h3>
+				<span>2</span>
+			</div>
+			<div class="gate">
+				<h3>Gate</h3>
+				<span>42A</span>
+			</div>
+			{#if departureOrArrival == 'Arrival'}
+				<div class="baggage">
+					<h3>Baggage</h3>
+					<span>F4</span>
+				</div>
+			{/if}
 		</div>
 	</div>
 </section>
@@ -25,6 +50,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		text-align: center;
 		background-color: #dff;
 		filter: blur(50%);
 		margin: 25px 10px;
@@ -33,7 +59,7 @@
 
 	.card > h3 {
 		text-decoration: underline;
-		max-width: 75%;
+		/* max-width: 75%; */
 	}
 
 	.iata-code {
