@@ -1,5 +1,10 @@
 <script>
 	import FlightCard from './flightCard.svelte';
+	import { Icon } from 'svelte-fontawesome';
+	import {
+		faArrowCircleRight,
+		faArrowCircleLeft
+	} from '@fortawesome/free-solid-svg-icons';
 </script>
 
 <section id="flight-ticket">
@@ -13,18 +18,20 @@
 			>
 		</div>
 	</div>
-	<div id="progress">
+	<div id="progress" style="color: white">
 		<h2 title="origin.code_iata">ORI</h2>
 		<div id="progress-bar">
-			<span>progress</span>
+			<span style:visibility="visible" style:width="25%"
+				>progress</span
+			>
 		</div>
 		<h2 title="origin.code_iata">DES</h2>
 	</div>
 
 	<div id="flight-selector">
-		<button>next arrow</button>
+		<button><Icon icon={faArrowCircleLeft} /> </button>
 		<button>current flight</button>
-		<button>prev arrow</button>
+		<button><Icon icon={faArrowCircleRight} /></button>
 	</div>
 
 	<div class="inbound flight"></div>
@@ -77,10 +84,18 @@
 		max-width: 768px;
 	}
 
-	@media screen and (max-width: 640px) {
+	@media screen and (max-width: 740px) {
 		#flight-ticket {
 			margin-bottom: 0;
 		}
+	}
+
+	button {
+		border: none;
+		font-size: 38px;
+    background: none;
+		color: white;
+    cursor: pointer;
 	}
 
 	#flight-status {
