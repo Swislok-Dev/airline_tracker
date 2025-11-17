@@ -1,13 +1,15 @@
+<script>
+</script>
+
 <!-- <section id="search-form"> -->
-<form class="form-control">
+<form
+	class="form-control"
+	method="GET"
+	action="?/submitData"
+>
 	<label for="ident">Please enter a flight number</label>
 	<div id="search-input">
-		<input
-			type="text"
-			name="ident"
-			required
-			placeholder="ua3"
-		/>
+		<input type="text" name="ident" placeholder="ua3" />
 		<button
 			id="search-button"
 			type="submit"
@@ -63,9 +65,9 @@
 		border-radius: 0.25rem;
 	}
 
-  input::placeholder {
-    opacity: 30%;
-  }
+	input::placeholder {
+		opacity: 30%;
+	}
 
 	button {
 		padding: 5px;
@@ -76,6 +78,7 @@
 		color: white;
 		border-radius: 0.25rem;
 		font-size: 100%;
+		cursor: pointer;
 	}
 
 	label {

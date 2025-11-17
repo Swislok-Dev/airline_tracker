@@ -1,7 +1,7 @@
 <script>
 	import { resolve } from '$app/paths';
 	import FlightTicket from '../components/flights/flightTicket.svelte';
-	import SearchForm from '../components/searchForm.svelte';
+	import SearchForm from '../components/searchForm/+page.svelte';
 </script>
 
 <header>
