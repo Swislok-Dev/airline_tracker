@@ -93,9 +93,9 @@
 	button {
 		border: none;
 		font-size: 38px;
-    background: none;
+		background: none;
 		color: white;
-    cursor: pointer;
+		cursor: pointer;
 	}
 
 	#flight-status {
