@@ -1,4 +1,10 @@
 <script>
+	let { ident } = $props();
+
+	async function handleClick(ident) {
+		// const res = await fetch(`api/flight/${ident}`);
+		console.log('+page 1:', { ident });
+	}
 </script>
 
 <!-- <section id="search-form"> -->
@@ -9,8 +15,14 @@
 >
 	<label for="ident">Please enter a flight number</label>
 	<div id="search-input">
-		<input type="text" name="ident" placeholder="ua3" />
+		<input
+			type="text"
+			name="ident"
+			placeholder="ua3"
+			bind:value={ident}
+		/>
 		<button
+			onclick={() => handleClick(ident)}
 			id="search-button"
 			type="submit"
 			value="Find Flight"
