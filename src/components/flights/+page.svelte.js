@@ -1,3 +1,4 @@
+const flightData = $props();
 const flightScheduled = {
 	Scheduled: 'scheduled',
 	'Scheduled / Delayed': 'scheduled delayed',
@@ -10,9 +11,13 @@ const flightScheduled = {
 };
 
 export function getFlightStatus(status) {
-  for (const key in flightScheduled) {
-    if status.contains(key) {
-      console.log(key)
-    }
-  }
+	for (const key in flightScheduled) {
+		if (status.contains(key)) {
+			console.log(key);
+		}
+	}
+}
+
+export function onMount() {
+	return flightData;
 }

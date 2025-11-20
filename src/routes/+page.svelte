@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import FlightTicket from '../components/flights/flightTicket.svelte';
 	import SearchForm from '../components/searchForm/+page.svelte';
+	let { ident } = $props();
 </script>
 
 <header>
@@ -14,7 +15,7 @@
 
 <main>
 	<div>
-		<SearchForm />
+		<SearchForm {ident} />
 		<FlightTicket />
 	</div>
 </main>

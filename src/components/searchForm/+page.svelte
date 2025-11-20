@@ -1,14 +1,27 @@
 <script>
+	import { getFlightData } from './search';
+	let flightArray = $state();
+
 	let { ident } = $props();
 
 	async function handleClick(ident) {
-		// const res = await fetch(`api/flight/${ident}`);
-		console.log('+page 1:', { ident });
+		console.log('handleClick ident:', { ident });
+		// flightArray = await getFlightData(ident);
+		flightArray = await fetch(`api/flight/${ident}`, {});
+		const flightData = await flightArray.json();
+
+		console.log('from searchForm/+page.svelte:', {
+			flightData
+		});
+		return {
+			state: { flightData }
+		};
 	}
 </script>
 
 <!-- <section id="search-form"> -->
 <form
+	onsubmit={() => handleClick( ident )}
 	class="form-control"
 	method="GET"
 	action="?/submitData"
@@ -22,7 +35,6 @@
 			bind:value={ident}
 		/>
 		<button
-			onclick={() => handleClick(ident)}
 			id="search-button"
 			type="submit"
 			value="Find Flight"
