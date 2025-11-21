@@ -1,14 +1,15 @@
 <script>
-	import { getFlightData } from './search';
+	import { searchStore } from '../../stores';
 	let flightArray = $state();
 
 	let { ident } = $props();
 
-	async function handleClick(ident) {
-		console.log('handleClick ident:', { ident });
-		// flightArray = await getFlightData(ident);
+	async function handleSubmit(ident) {
+		console.log('handleSubmit ident:', { ident });
 		flightArray = await fetch(`api/flight/${ident}`, {});
 		const flightData = await flightArray.json();
+
+		searchStore.set({ flightData });
 
 		console.log('from searchForm/+page.svelte:', {
 			flightData
@@ -21,7 +22,7 @@
 
 <!-- <section id="search-form"> -->
 <form
-	onsubmit={() => handleClick( ident )}
+	onsubmit={() => handleSubmit(ident)}
 	class="form-control"
 	method="GET"
 	action="?/submitData"

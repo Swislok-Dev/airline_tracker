@@ -5,40 +5,43 @@
 		faArrowCircleRight,
 		faArrowCircleLeft
 	} from '@fortawesome/free-solid-svg-icons';
+  import {searchStore} from '../../stores.js'
 </script>
 
-<section id="flight-ticket">
-	<div class="outbound flight">
-		<div id="flight-status" class="scheduled">
-			<h2>status</h2>
-			<span
-				id="status"
-				title="this is an internal reference number and may differ from your input"
-				>status for currentFLight.ident</span
-			>
+{#if $searchStore} 
+	<section id="flight-ticket">
+		<div class="outbound flight">
+			<div id="flight-status" class="scheduled">
+				<h2>Status</h2>
+				<span
+					id="status"
+					title="this is an internal reference number and may differ from your input"
+					>status for currentFLight.ident</span
+				>
+			</div>
 		</div>
-	</div>
-	<div id="progress" style="color: white">
-		<h2 title="origin.code_iata">ORI</h2>
-		<div id="progress-bar">
-			<span style:visibility="visible" style:width="25%"
-				>progress</span
-			>
+		<div id="progress" style="color: white">
+			<h2 title="origin.code_iata">ORI</h2>
+			<div id="progress-bar">
+				<span style:visibility="visible" style:width="25%"
+					>progress</span
+				>
+			</div>
+			<h2 title="origin.code_iata">DES</h2>
 		</div>
-		<h2 title="origin.code_iata">DES</h2>
-	</div>
 
-	<div id="flight-selector">
-		<button><Icon icon={faArrowCircleLeft} /> </button>
-		<button>current flight</button>
-		<button><Icon icon={faArrowCircleRight} /></button>
-	</div>
+		<div id="flight-selector">
+			<button><Icon icon={faArrowCircleLeft} /> </button>
+			<button>current flight</button>
+			<button><Icon icon={faArrowCircleRight} /></button>
+		</div>
 
-	<div class="inbound flight"></div>
+		<div class="inbound flight"></div>
 
-	<FlightCard departureOrArrival="Departure" />
-	<FlightCard departureOrArrival="Arrival" />
-</section>
+		<FlightCard departureOrArrival="Departure" />
+		<FlightCard departureOrArrival="Arrival" />
+	</section>
+{/if}
 
 <style>
 	:root {
