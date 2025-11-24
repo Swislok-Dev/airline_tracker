@@ -1,14 +1,22 @@
 <script>
+	import { searchStore } from '../../stores.js';
 	import FlightCard from './flightCard.svelte';
 	import { Icon } from 'svelte-fontawesome';
 	import {
 		faArrowCircleRight,
 		faArrowCircleLeft
 	} from '@fortawesome/free-solid-svg-icons';
-  import {searchStore} from '../../stores.js'
+	function flights() {
+		const data = $searchStore;
+		const flightData = data.flightData;
+		console.log(flightData['flights']);
+		return flightData;
+	}
+	// const flightData = $props();
 </script>
 
-{#if $searchStore} 
+{#if $searchStore}
+	{flights()}
 	<section id="flight-ticket">
 		<div class="outbound flight">
 			<div id="flight-status" class="scheduled">

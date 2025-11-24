@@ -1,4 +1,3 @@
-const flightData = $props();
 const flightScheduled = {
 	Scheduled: 'scheduled',
 	'Scheduled / Delayed': 'scheduled delayed',
@@ -16,8 +15,4 @@ export function getFlightStatus(status) {
 			console.log(key);
 		}
 	}
-}
-
-export function onMount() {
-	return flightData;
 }

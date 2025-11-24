@@ -6,14 +6,16 @@
 
 	async function handleSubmit(ident) {
 		console.log('handleSubmit ident:', { ident });
+		// flightArray = await fetch(`api/flight/`, {});
 		flightArray = await fetch(`api/flight/${ident}`, {});
 		const flightData = await flightArray.json();
 
 		searchStore.set({ flightData });
 
-		console.log('from searchForm/+page.svelte:', {
-			flightData
-		});
+		console.log(
+			'from searchForm/+page.svelte:',
+			flightData['flights'].length
+		);
 		return {
 			state: { flightData }
 		};

@@ -1,14 +1,14 @@
 import { VITE_AEROAPI_KEY } from '$env/static/private';
 
-export const GET = async ({ request, url }) => {
-  console.log("from /api/flights/")
-  return
-	const aeroapiURI =
-		'https://aeroapi.flightaware.com/aeroapi/';
+export const GET = async ({ params,url }) => {
+	console.log('from /api/flights/');
+  const ident = url.searchParams.get("ident")
+  console.log({ident})
 
-	const ident = String(url.searchParams.get('ident'));
-	const shortURI = `https://aeroapi.flightaware.com/aeroapi/flights/${ident}`;
-	console.log(ident);
+  return new Response(JSON.stringify({message: "early return"}))
+	// const ident = String(url.searchParams.get('ident'));
+	const shortURI = `https://aeroapi.flightaware.com/aeroapi/flights/${params.ident}`;
+	// console.log({ ident });
 	console.log(shortURI);
 
 	// const res = await fetch(aeroapiURI + 'flights/ua3');
