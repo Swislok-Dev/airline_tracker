@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import FlightTicket from '../components/flights/flightTicket.svelte';
 	import SearchForm from '../components/searchForm/+page.svelte';
-  const {ident} = $props()
+  const { currentFlight} = $props()
 </script>
 
 <header>
@@ -15,8 +15,8 @@
 
 <main>
 	<div>
-		<SearchForm {ident}/>
-		<FlightTicket />
+		<SearchForm />
+		<FlightTicket {currentFlight}/>
 	</div>
 </main>
 

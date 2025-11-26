@@ -1,23 +1,27 @@
 <script>
 	import { searchStore } from '../../stores';
+	import { findCurrentFlight } from '../flights/+page.svelte';
 	let flightArray = $state();
 
-	let { ident } = $props();
+	import { page } from '$app/stores';
+	let ident = $state('');
 
-	async function handleSubmit(ident) {
-		console.log('handleSubmit ident:', { ident });
-		// flightArray = await fetch(`api/flight/`, {});
+	if ($page?.url?.searchParams) {
+		ident = $page.url.searchParams.get('ident');
+	}
+
+	async function handleSubmit() {
 		flightArray = await fetch(`api/flight/${ident}`, {});
 		const flightData = await flightArray.json();
 
 		searchStore.set({ flightData });
 
-		console.log(
-			'from searchForm/+page.svelte:',
-			flightData['flights'].length
-		);
+		const currentFlight = findCurrentFlight(flightData);
+
+		searchStore.set({ currentFlight });
+
 		return {
-			state: { flightData }
+			props: { currentFlight }
 		};
 	}
 </script>
