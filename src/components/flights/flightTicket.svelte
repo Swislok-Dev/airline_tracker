@@ -1,41 +1,93 @@
 <script>
+	import { get } from 'svelte/store';
 	import { searchStore } from '../../stores.js';
+	import { page } from '$app/stores';
+	import { findCurrentFlight } from './+page.svelte';
+
 	import FlightCard from './flightCard.svelte';
 	import { Icon } from 'svelte-fontawesome';
 	import {
 		faArrowCircleRight,
 		faArrowCircleLeft
 	} from '@fortawesome/free-solid-svg-icons';
-	function flights() {
-		const data = $searchStore;
-		const flightData = data.flightData;
-		console.log(flightData['flights']);
-		return flightData;
+
+	let currentFlight = $state();
+	let flightArray = $state();
+	let ident = $state('');
+
+	if ($page?.url?.searchParams) {
+		ident = $page.url.searchParams.get('ident');
 	}
-	// const flightData = $props();
+
+	async function handleSubmit() {
+		flightArray = await fetch(`api/flight/${ident}`, {});
+		const flightData = await flightArray.json();
+
+		searchStore.set({ flightData });
+
+		currentFlight = findCurrentFlight(flightData);
+
+		searchStore.set({ currentFlight });
+
+		return {
+			props: { currentFlight }
+		};
+	}
 </script>
 
+<form
+	onsubmit={() => handleSubmit()}
+	class="form-control"
+	method="GET"
+	action="?/submitData"
+>
+	<label for="ident">Please enter a flight number</label>
+	<div id="search-input">
+		<input
+			type="text"
+			name="ident"
+			placeholder="ua3"
+			bind:value={ident}
+		/>
+		<button
+			id="search-button"
+			type="submit"
+			value="Find Flight"
+		>
+			Search
+		</button>
+	</div>
+</form>
+
 {#if $searchStore}
-	{flights()}
 	<section id="flight-ticket">
 		<div class="outbound flight">
-			<div id="flight-status" class="scheduled">
-				<h2>Status</h2>
+			<div
+				id="flight-status"
+				class={currentFlight.status.toLowerCase()}
+			>
+				<h2>{currentFlight.status}</h2>
 				<span
 					id="status"
 					title="this is an internal reference number and may differ from your input"
-					>status for currentFLight.ident</span
-				>
+				></span>
 			</div>
 		</div>
 		<div id="progress" style="color: white">
-			<h2 title="origin.code_iata">ORI</h2>
+			<h2 title="origin.code_iata">
+				{currentFlight.origin.code_iata}
+			</h2>
 			<div id="progress-bar">
-				<span style:visibility="visible" style:width="25%"
-					>progress</span
-				>
+				<span
+					style:width={String(
+						currentFlight.progress_percent
+					) + '%'}
+					style:visibility="visible"
+				></span>
 			</div>
-			<h2 title="origin.code_iata">DES</h2>
+			<h2 title="origin.code_iata">
+				{currentFlight.destination.code_iata}
+			</h2>
 		</div>
 
 		<div id="flight-selector">
@@ -46,12 +98,89 @@
 
 		<div class="inbound flight"></div>
 
-		<FlightCard departureOrArrival="Departure" />
-		<FlightCard departureOrArrival="Arrival" />
+		<FlightCard
+			departureOrArrival="Departure"
+			details={currentFlight.origin}
+			{currentFlight}
+		/>
+		<FlightCard
+			departureOrArrival="Arrival"
+			details={currentFlight.destination}
+			{currentFlight}
+		/>
 	</section>
 {/if}
 
 <style>
+	.form-control {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		width: 100%;
+		gap: 1rem;
+	}
+	form {
+		padding: 0 0.5rem;
+		width: 95%;
+		max-width: 28rem;
+	}
+
+	#search-input {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 5px;
+		width: 100%;
+	}
+
+	@media (max-width: 450px) {
+		#search-input {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	input {
+		font-size: 1rem;
+		flex-grow: 3;
+		width: 75%;
+		margin: auto;
+		padding: 5px;
+		text-align: center;
+		text-transform: uppercase;
+		border-color: red;
+		border-radius: 0.25rem;
+	}
+
+	input::placeholder {
+		opacity: 30%;
+	}
+
+	button {
+		border: none;
+		font-size: 38px;
+		background: none;
+		color: white;
+		cursor: pointer;
+	}
+
+	form button {
+		padding: 5px;
+		flex-shrink: 4;
+		width: 75%;
+		border: none;
+		background-color: red;
+		color: white;
+		border-radius: 0.25rem;
+		font-size: 100%;
+		cursor: pointer;
+	}
+
+	label {
+		color: white;
+	}
 	:root {
 		--taxiing: rgb(250, 164, 43);
 		--scheduled: rgb(43, 206, 251);
@@ -99,14 +228,6 @@
 		#flight-ticket {
 			margin-bottom: 0;
 		}
-	}
-
-	button {
-		border: none;
-		font-size: 38px;
-		background: none;
-		color: white;
-		cursor: pointer;
 	}
 
 	#flight-status {

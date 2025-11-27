@@ -4,7 +4,7 @@
 	let flightArray = $state();
 
 	import { page } from '$app/stores';
-	let ident = $state('');
+	let ident = $props();
 
 	if ($page?.url?.searchParams) {
 		ident = $page.url.searchParams.get('ident');
@@ -28,7 +28,7 @@
 
 <!-- <section id="search-form"> -->
 <form
-	onsubmit={() => handleSubmit(ident)}
+	onsubmit={() => handleSubmit()}
 	class="form-control"
 	method="GET"
 	action="?/submitData"

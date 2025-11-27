@@ -1,5 +1,9 @@
 <script>
-	let { departureOrArrival } = $props();
+	import { getTime, getDate } from "./+page.svelte";
+
+	let { currentFlight, departureOrArrival, details } =
+		$props();
+  
 </script>
 
 <section id="flight-cards">
@@ -7,36 +11,43 @@
 		<h2 title="origin.code_iata" class="iata-code">
 			{departureOrArrival}
 		</h2>
-		<span class="airport-name">origin.name</span>
+		<span class="airport-name">{details.name}</span>
 		<h3>Departure Times</h3>
-		<span>scheduled_datetime</span>
+		<span>{getDate(currentFlight.scheduled_out)}</span>
 		<div class="flight-times">
 			<div>
 				<h3>Scheduled</h3>
-				<span>toggle_times</span>
+				<span>{getTime(currentFlight.estimated_out)}</span>
 			</div>
 			<div>
 				<h3>Estimated/Actual</h3>
-				<span>toggle_times</span>
+				<span>{getTime(currentFlight.estimated_on)}</span>
 			</div>
 		</div>
+
+    {#if currentFlight.origin.gate}
 
 		<div class="terminal-info">
 			<div class="terminal">
 				<h3>Terminal</h3>
-				<span>2</span>
+				<span>{currentFlight.terminal_destination}</span>
 			</div>
 			<div class="gate">
 				<h3>Gate</h3>
-				<span>42A</span>
+				{#if departureOrArrival == 'Departure'}
+					<span>{currentFlight.gate_origin}</span>
+				{:else}
+					<span>{currentFlight.gate_destination} </span>
+				{/if}
 			</div>
-			{#if departureOrArrival == 'Arrival'}
+			{#if departureOrArrival == 'Arrival' && currentFlight.baggage_claim}
 				<div class="baggage">
 					<h3>Baggage</h3>
-					<span>F4</span>
+					<span>{currentFlight.baggage_claim}</span>
 				</div>
 			{/if}
 		</div>
+    {/if}
 	</div>
 </section>
 

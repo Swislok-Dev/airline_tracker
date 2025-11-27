@@ -19,6 +19,7 @@ export function getFlightStatus(status) {
 
 const nextScheduledFlight = (currentFlight, nextFlight) => {
 	console.log('nextScheduledFlight()');
+	console.log({ currentFlight, nextFlight });
 	if (
 		nextFlight.actuall_off === null &&
 		!nextFlight.status.includes('Cancelled')
@@ -35,7 +36,7 @@ const nextScheduledFlight = (currentFlight, nextFlight) => {
 };
 
 export function findCurrentFlight(flightsArray) {
-	console.log('findCurrentFlight()');
+	console.log('findCurrentFlight()', flightsArray);
 	const flights = flightsArray['flights'];
 
 	for (let i = 0; i < flights.length; i++) {
@@ -47,3 +48,20 @@ export function findCurrentFlight(flightsArray) {
 		}
 	}
 }
+
+
+const dateString = (date) => {
+  return new Date(date);
+};
+
+export const getTime = (date) => {
+  const time = dateString(date).toLocaleTimeString();
+  console.log(time)
+  return time;
+};
+
+export const getDate = (date) => {
+  if (date) {
+    return dateString(date).toDateString();
+  }
+};
