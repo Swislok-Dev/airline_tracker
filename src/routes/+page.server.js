@@ -6,18 +6,3 @@ export function load({ url }) {
 		props: ident
 	};
 }
-
-export async function getFlights(ident) {
-	console.log('calling getFlights');
-	const response = await fetch(`api/flight/${ident}`);
-
-	if (!response.ok) {
-		throw new Error(
-			`API call failed with status ${response.status}`
-		);
-	} else {
-		console.log('API cleared');
-	}
-
-	return response.json();
-}
