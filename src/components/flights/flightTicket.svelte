@@ -36,6 +36,7 @@
 
 <form
 	data-sveltekit-keepfocus
+  autocomplete="off"
 	onsubmit={() => handleSubmit()}
 	class="form-control"
 	method="GET"
