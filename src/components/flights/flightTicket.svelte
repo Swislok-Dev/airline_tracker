@@ -1,5 +1,4 @@
 <script>
-	import { get } from 'svelte/store';
 	import { searchStore } from '../../stores.js';
 	import { page } from '$app/stores';
 	import { findCurrentFlight } from './+page.svelte';
@@ -36,6 +35,7 @@
 </script>
 
 <form
+	data-sveltekit-keepfocus
 	onsubmit={() => handleSubmit()}
 	class="form-control"
 	method="GET"
