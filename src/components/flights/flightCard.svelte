@@ -1,9 +1,8 @@
 <script>
-	import { getTime, getDate } from "./+page.svelte";
+	import { getTime, getDate } from './+page.svelte';
 
 	let { currentFlight, departureOrArrival, details } =
 		$props();
-  
 </script>
 
 <section id="flight-cards">
@@ -12,42 +11,59 @@
 			{departureOrArrival}
 		</h2>
 		<span class="airport-name">{details.name}</span>
-		<h3>Departure Times</h3>
-		<span>{getDate(currentFlight.scheduled_out)}</span>
+		{#if departureOrArrival == 'Departure'}
+			<h3>Departure Times</h3>
+			<span>{getDate(currentFlight.scheduled_out)}</span>
+		{:else}
+			<h3>Arrival Times</h3>
+			<span>{getDate(currentFlight.scheduled_in)}</span>
+		{/if}
+
 		<div class="flight-times">
-			<div>
-				<h3>Scheduled</h3>
-				<span>{getTime(currentFlight.estimated_out)}</span>
-			</div>
-			<div>
-				<h3>Estimated/Actual</h3>
-				<span>{getTime(currentFlight.estimated_on)}</span>
-			</div>
-		</div>
-
-    {#if currentFlight.origin.gate}
-
-		<div class="terminal-info">
-			<div class="terminal">
-				<h3>Terminal</h3>
-				<span>{currentFlight.terminal_destination}</span>
-			</div>
-			<div class="gate">
-				<h3>Gate</h3>
-				{#if departureOrArrival == 'Departure'}
-					<span>{currentFlight.gate_origin}</span>
-				{:else}
-					<span>{currentFlight.gate_destination} </span>
-				{/if}
-			</div>
-			{#if departureOrArrival == 'Arrival' && currentFlight.baggage_claim}
-				<div class="baggage">
-					<h3>Baggage</h3>
-					<span>{currentFlight.baggage_claim}</span>
+			{#if departureOrArrival == 'Departure'}
+				<div>
+					<h3>Scheduled</h3>
+					<span>{getTime(currentFlight.scheduled_out)}</span
+					>
+				</div>
+				<div>
+					<h3>Estimated/Actual</h3>
+					<span>{getTime(currentFlight.estimated_out)}</span>
+				</div>
+			{:else}
+				<div>
+					<h3>Scheduled</h3>
+					<span>{getTime(currentFlight.scheduled_in)}</span>
+				</div>
+				<div>
+					<h3>Estimated/Actual</h3>
+					<span>{getTime(currentFlight.estimated_in)}</span>
 				</div>
 			{/if}
 		</div>
-    {/if}
+
+		{#if currentFlight.origin.gate}
+			<div class="terminal-info">
+				<div class="terminal">
+					<h3>Terminal</h3>
+					<span>{currentFlight.terminal_destination}</span>
+				</div>
+				<div class="gate">
+					<h3>Gate</h3>
+					{#if departureOrArrival == 'Departure'}
+						<span>{currentFlight.gate_origin}</span>
+					{:else}
+						<span>{currentFlight.gate_destination} </span>
+					{/if}
+				</div>
+				{#if departureOrArrival == 'Arrival' && currentFlight.baggage_claim}
+					<div class="baggage">
+						<h3>Baggage</h3>
+						<span>{currentFlight.baggage_claim}</span>
+					</div>
+				{/if}
+			</div>
+		{/if}
 	</div>
 </section>
 
