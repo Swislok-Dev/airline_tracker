@@ -56,7 +56,6 @@ const dateString = (date) => {
 
 export const getTime = (date) => {
   const time = dateString(date).toLocaleTimeString();
-  console.log(time)
   return time;
 };
 
