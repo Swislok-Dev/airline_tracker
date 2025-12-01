@@ -18,7 +18,9 @@
 		ident = $page.url.searchParams.get('ident');
 	}
 
-	async function handleSubmit() {
+	async function handleSubmit(event) {
+		event.preventDefault();
+
 		flightArray = await fetch(`api/flight/${ident}`, {});
 		const flightData = await flightArray.json();
 
@@ -32,12 +34,18 @@
 			props: { currentFlight }
 		};
 	}
+
+	function getClass(status) {
+		let newStatus = status.replace(/\s/g, '');
+		newStatus = newStatus.replace('/', ' ').toLowerCase();
+		return newStatus;
+	}
 </script>
 
 <form
 	data-sveltekit-keepfocus
-  autocomplete="off"
-	onsubmit={() => handleSubmit()}
+	autocomplete="off"
+	onsubmit={(event) => handleSubmit(event)}
 	class="form-control"
 	method="GET"
 	action="?/submitData"
@@ -65,13 +73,13 @@
 		<div class="outbound flight">
 			<div
 				id="flight-status"
-				class={currentFlight.status.toLowerCase()}
+				class={getClass(currentFlight.status)}
 			>
-				<h2>{currentFlight.status}</h2>
+				<h3>{currentFlight.status}</h3>
 				<span
 					id="status"
 					title="this is an internal reference number and may differ from your input"
-				></span>
+				>{currentFlight.ident}</span>
 			</div>
 		</div>
 		<div id="progress" style="color: white">
@@ -247,6 +255,11 @@
 		font-weight: 500;
 	}
 
+  #flight-status.cancelled {
+    background-color: var(--cancelled);
+    color: white;
+  }
+
 	#flight-status.taxiing {
 		background-color: var(--taxiing);
 		color: black;
@@ -270,7 +283,7 @@
 		background-color: var(--scheduled);
 		color: black;
 	}
-	.flight-status.scheduled.delayed {
+	#flight-status.scheduled.delayed {
 		background-color: var(--scheduled);
 		background-image: linear-gradient(
 			130deg,
@@ -279,7 +292,7 @@
 		);
 		color: black;
 	}
-	#flight-status.enroute.on-time {
+	#flight-status.enroute.ontime {
 		background-color: var(--on-time);
 		color: black;
 	}
