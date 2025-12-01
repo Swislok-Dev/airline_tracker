@@ -9,19 +9,8 @@ const flightScheduled = [
 	'En Route'
 ];
 
-export function getFlightStatus(status) {
-	for (const key in flightScheduled) {
-		if (status.contains(key)) {
-			console.log(key);
-		}
-	}
-}
-
 const nextScheduledFlight = (currentFlight, prevFlight) => {
-	console.log('currentFlight.status', currentFlight.status);
-	console.log('prevFlight.status', prevFlight.status);
 	console.log(new Date().toISOString());
-
 	console.log({ currentFlight, prevFlight });
 
 	if (
@@ -37,9 +26,10 @@ const nextScheduledFlight = (currentFlight, prevFlight) => {
 		return false;
 	}
 	console.log('Previous flight status:', prevFlight.status);
-	console.log('Current flight status:', currentFlight.status);
-
-
+	console.log(
+		'Current flight status:',
+		currentFlight.status
+	);
 
 	return true;
 };
