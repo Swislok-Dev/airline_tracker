@@ -47,6 +47,14 @@ export const findCurrentFlight = (flightsArray) => {
 	}
 };
 
+export const checkNullValue = (flight) => {
+	if (flight === null) {
+		return 'N/A';
+	} else {
+		return flight;
+	}
+};
+
 const dateString = (date) => {
 	return new Date(date);
 };
