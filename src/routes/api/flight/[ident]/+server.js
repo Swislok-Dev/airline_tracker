@@ -4,7 +4,6 @@ export async function GET({ params }) {
 	console.log('calling api');
 	const aeroapiURI = `https://aeroapi.flightaware.com/aeroapi/flights/${params.ident}`;
 
-
 	const res = await fetch(aeroapiURI, {
 		// mode: 'no-cors',
 		headers: {
