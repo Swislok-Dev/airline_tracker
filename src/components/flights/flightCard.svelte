@@ -17,32 +17,45 @@
 		<span class="airport-name">{details.name}</span>
 		{#if departureOrArrival == 'Departure'}
 			<h3>Departure Times</h3>
-			<span>{getDate(currentFlight.scheduled_out)}</span>
+			<span>{getDate(currentFlight.scheduled_off)}</span>
 		{:else}
 			<h3>Arrival Times</h3>
-			<span>{getDate(currentFlight.scheduled_in)}</span>
+			<span>{getDate(currentFlight.scheduled_on)}</span>
 		{/if}
 
 		<div class="flight-times">
 			{#if departureOrArrival == 'Departure'}
 				<div>
 					<h3>Scheduled</h3>
-					<span>{getTime(currentFlight.scheduled_out)}</span
+					<span>{getTime(currentFlight.scheduled_off)}</span
 					>
 				</div>
 				<div>
-					<h3>Estimated/Actual</h3>
-					<span>{getTime(currentFlight.estimated_out)}</span
-					>
+					{#if currentFlight.actual_off == null}
+						<h3>Estimated</h3>
+						<span
+							>{getTime(currentFlight.estimated_off)}</span
+						>
+					{:else}
+						<h3>Actual</h3>
+						<span>{getTime(currentFlight.actual_off)}</span>
+					{/if}
 				</div>
 			{:else}
 				<div>
 					<h3>Scheduled</h3>
-					<span>{getTime(currentFlight.scheduled_in)}</span>
+					<span>{getTime(currentFlight.scheduled_on)}</span>
 				</div>
 				<div>
-					<h3>Estimated/Actual</h3>
-					<span>{getTime(currentFlight.estimated_in)}</span>
+					{#if currentFlight.actual_on == null}
+						<h3>Estimated</h3>
+						<span
+							>{getTime(currentFlight.estimated_on)}</span
+						>
+					{:else}
+						<h3>Actual</h3>
+						<span>{getTime(currentFlight.actuall_on)}</span>
+					{/if}
 				</div>
 			{/if}
 		</div>
