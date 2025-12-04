@@ -53,27 +53,23 @@
 		return newStatus;
 	}
 
-	// $effect(() => {
-	//    console.table(index)
-	// 	index = getFlightIndex(displayCurrentFlight);
-	// });
-
-	// const getFlightIndex = (flight) => {
-	// 	return flights.indexOf({ flight });
-	// };
+	const getFlightIndex = (flight) => {
+		return flightData['flights'].indexOf(flight);
+	};
 
 	const returnToCurrentFlight = () => {
-		displayCurrentFlight(currentFlight);
+		displayCurrentFlight = currentFlight;
+		index = getFlightIndex(displayCurrentFlight);
 	};
 
 	const getPreviousFlight = () => {
-		console.log('previous index', index);
-		index++;
-		displayCurrentFlight = flightData['flights'][index];
+		if (index != flightData['flights'].length - 1) {
+			index++;
+			displayCurrentFlight = flightData['flights'][index];
+		}
 	};
 
 	const getNextFlight = () => {
-		console.log('next index', index);
 		if (index != flights.length - 1) {
 			index = index - 1;
 			displayCurrentFlight = flightData['flights'][index];
