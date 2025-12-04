@@ -28,6 +28,11 @@
 		isLoading = true;
 
 		flightArray = await fetch(`api/flight/${ident}`, {});
+		if (flightArray.status != 200) {
+			isLoading = false;
+			return;
+		}
+
 		flightData = await flightArray.json();
 
 		searchStore.set({ flightData });
@@ -109,7 +114,7 @@
 	</div>
 </form>
 
-{#if $searchStore}
+{#if currentFlight}
 	<section id="flight-ticket">
 		<div class="outbound flight">
 			<div
