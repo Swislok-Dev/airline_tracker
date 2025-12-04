@@ -10,9 +10,6 @@ const flightScheduled = [
 ];
 
 const nextScheduledFlight = (currentFlight, prevFlight) => {
-	console.log(new Date().toISOString());
-	console.log({ currentFlight, prevFlight });
-
 	if (
 		prevFlight.actual_off == null &&
 		!prevFlight.status.includes('Cancelled')
@@ -25,11 +22,6 @@ const nextScheduledFlight = (currentFlight, prevFlight) => {
 	) {
 		return false;
 	}
-	console.log('Previous flight status:', prevFlight.status);
-	console.log(
-		'Current flight status:',
-		currentFlight.status
-	);
 
 	return true;
 };

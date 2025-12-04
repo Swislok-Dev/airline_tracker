@@ -12,8 +12,12 @@
 
 	let currentFlight = $state();
 	let flightArray = $state();
+	let flights = $state('1');
+	let index = $derived(0);
 	let ident = $state('');
 	let isLoading = $state(false);
+	let flightData = $state();
+	let displayCurrentFlight = $state();
 
 	if ($page?.url?.searchParams) {
 		ident = $page.url.searchParams.get('ident');
@@ -24,18 +28,22 @@
 		isLoading = true;
 
 		flightArray = await fetch(`api/flight/${ident}`, {});
-		const flightData = await flightArray.json();
+		flightData = await flightArray.json();
 
 		searchStore.set({ flightData });
 
 		currentFlight = findCurrentFlight(flightData);
+		displayCurrentFlight = currentFlight;
 
 		searchStore.set({ currentFlight });
 
+		index = flightData['flights'].indexOf(currentFlight);
 		isLoading = false;
 
 		return {
-			props: { currentFlight }
+			currentFlight,
+			flightData,
+			index
 		};
 	}
 
@@ -44,6 +52,33 @@
 		newStatus = newStatus.replace('/', ' ').toLowerCase();
 		return newStatus;
 	}
+
+	// $effect(() => {
+	//    console.table(index)
+	// 	index = getFlightIndex(displayCurrentFlight);
+	// });
+
+	// const getFlightIndex = (flight) => {
+	// 	return flights.indexOf({ flight });
+	// };
+
+	const returnToCurrentFlight = () => {
+		displayCurrentFlight(currentFlight);
+	};
+
+	const getPreviousFlight = () => {
+		console.log('previous index', index);
+		index++;
+		displayCurrentFlight = flightData['flights'][index];
+	};
+
+	const getNextFlight = () => {
+		console.log('next index', index);
+		if (index != flights.length - 1) {
+			index = index - 1;
+			displayCurrentFlight = flightData['flights'][index];
+		}
+	};
 </script>
 
 {#if isLoading}
@@ -83,50 +118,60 @@
 		<div class="outbound flight">
 			<div
 				id="flight-status"
-				class={getClass(currentFlight.status)}
+				class={getClass(displayCurrentFlight.status)}
 			>
-				<h3>{currentFlight.status}</h3>
+				<h3>{displayCurrentFlight.status}</h3>
 				<span
 					id="status"
 					title="this is an internal reference number and may differ from your input"
-					>{currentFlight.ident}</span
+					>{displayCurrentFlight.ident}</span
 				>
 			</div>
 		</div>
 		<div id="progress" style="color: white">
 			<h2 title="origin.code_iata">
-				{currentFlight.origin.code_iata}
+				{displayCurrentFlight.origin.code_iata}
 			</h2>
 			<div id="progress-bar">
 				<span
 					style:width={String(
-						currentFlight.progress_percent
+						displayCurrentFlight.progress_percent
 					) + '%'}
 					style:visibility="visible"
 				></span>
 			</div>
 			<h2 title="origin.code_iata">
-				{currentFlight.destination.code_iata}
+				{displayCurrentFlight.destination.code_iata}
 			</h2>
 		</div>
 
 		<div id="flight-selector">
-			<button><Icon icon={faArrowCircleLeft} /> </button>
-			<button>current flight</button>
-			<button><Icon icon={faArrowCircleRight} /></button>
+			<button
+				onclick={() =>
+					getPreviousFlight({ displayCurrentFlight })}
+				><Icon icon={faArrowCircleLeft} />
+			</button>
+			<button onclick={returnToCurrentFlight}
+				>current flight</button
+			>
+			<button
+				onclick={() =>
+					getNextFlight({ displayCurrentFlight })}
+				><Icon icon={faArrowCircleRight} /></button
+			>
 		</div>
 
 		<div class="inbound flight"></div>
 
 		<FlightCard
 			departureOrArrival="Departure"
-			details={currentFlight.origin}
-			{currentFlight}
+			details={displayCurrentFlight.origin}
+			currentFlight={displayCurrentFlight}
 		/>
 		<FlightCard
 			departureOrArrival="Arrival"
-			details={currentFlight.destination}
-			{currentFlight}
+			details={displayCurrentFlight.destination}
+			currentFlight={displayCurrentFlight}
 		/>
 	</section>
 {/if}
