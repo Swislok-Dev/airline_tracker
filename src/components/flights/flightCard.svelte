@@ -54,7 +54,7 @@
 						>
 					{:else}
 						<h3>Actual</h3>
-						<span>{getTime(currentFlight.actuall_on)}</span>
+						<span>{getTime(currentFlight.actual_on)}</span>
 					{/if}
 				</div>
 			{/if}
