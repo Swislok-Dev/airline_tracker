@@ -1,23 +1,38 @@
-# Airline Flight Tracker
+# sv
 
-Track flights with valid flight number
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Technology Used
+## Creating a project
 
-_Next.js_
-_Axios_
-_FlightAware API_
+If you're seeing this, you've probably already done this step. Congrats!
 
-## Uses
+```sh
+# create a new project in the current directory
+npx sv create
 
-- Ability to track current progress of flight.
-- Use arrows to search through future or past flights
-- Timezone information is a toggle button to view the time at the respective airports (destination and origin).
-  - By default will show the users local timezone information for external party keeping track of when friends/family will arrive.
-- Check current flight status.
-- Show airport codes and location.
+# create a new project in my-app
+npx sv create my-app
+```
 
-## Future Plans
+## Developing
 
-- Include weather options for airports
-- Search for flights to and from given destinations
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```sh
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```sh
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
