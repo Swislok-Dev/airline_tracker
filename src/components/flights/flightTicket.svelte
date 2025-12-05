@@ -152,9 +152,17 @@
 					getPreviousFlight({ displayCurrentFlight })}
 				><Icon icon={faArrowCircleLeft} />
 			</button>
-			<button onclick={returnToCurrentFlight}
-				>current flight</button
-			>
+			{#if displayCurrentFlight != currentFlight}
+				<button
+					style:opacity={displayCurrentFlight ==
+					currentFlight
+						? '0'
+						: '1'}
+					id="return-to-current-flight-btn"
+					onclick={returnToCurrentFlight}
+					>Show Current</button
+				>
+			{/if}
 			<button
 				onclick={() =>
 					getNextFlight({ displayCurrentFlight })}
@@ -410,9 +418,19 @@
 	}
 
 	#flight-selector {
-		margin: 3rem;
+		min-height: 80px;
+		margin: 1rem;
 		display: flex;
 		justify-content: space-between;
+		gap: 1.5rem;
 		align-items: center;
+	}
+
+	#flight-selector svg {
+		display: block;
+	}
+
+	#return-to-current-flight-btn {
+		font-size: clamp(18px, 10vw, 38px);
 	}
 </style>
