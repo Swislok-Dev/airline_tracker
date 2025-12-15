@@ -1,3 +1,5 @@
+[![wakatime](https://wakatime.com/badge/user/d5c62b56-8ac1-49ae-9074-9ce410e890eb/project/a315a406-3def-4e30-b506-4b751dab87ab.svg)](https://wakatime.com/badge/user/d5c62b56-8ac1-49ae-9074-9ce410e890eb/project/a315a406-3def-4e30-b506-4b751dab87ab)
+
 # Airline Tracker
 
 Track flights using a flight number
