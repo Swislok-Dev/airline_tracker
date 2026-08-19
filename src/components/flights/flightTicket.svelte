@@ -123,6 +123,11 @@
 			>
 				<h3>{displayCurrentFlight.status}</h3>
 				<span
+					style="color: {getClass(
+						displayCurrentFlight.status
+					).includes('delayed')
+						? '#113'
+						: 'inherit'}"
 					id="status"
 					title="this is an internal reference number and may differ from your input"
 					>{displayCurrentFlight.ident}</span
@@ -426,9 +431,9 @@
 		align-items: center;
 	}
 
-	#flight-selector svg {
-		display: block;
-	}
+	/* #flight-selector svg { */
+	/* 	display: block; */
+	/* } */
 
 	#return-to-current-flight-btn {
 		font-size: clamp(18px, 10vw, 38px);
